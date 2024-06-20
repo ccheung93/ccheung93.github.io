@@ -1,0 +1,17 @@
+---
+interface Props {
+	title: string;
+	authors: string;
+	journal: string;
+	url: string;
+	year: string;
+}
+
+const { title, authors, journal, url, year } = Astro.props;
+---
+
+<li>
+	<strong><span set:html={title}></span></strong>,
+	{authors},
+	<a href={url} target="_blank">{journal} ({year})</a>.
+</li>

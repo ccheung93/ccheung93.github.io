@@ -1,0 +1,80 @@
+---
+title: 'Atomic term symbols'
+description: 'an atomic term symbol calculator'
+pubDate: 'Jun 14 2024'
+---
+
+In atomic spectroscopy, the electronic state of an atom or ion can be specified by its atomic term symbol
+$$
+^{2S+1}L_J,
+$$
+where $$ S $$ is the total spin angular momentum, $$ L $$ is the total orbital angular momentum and $$ J $$ is the total angular momentum.
+
+One method of determining all term symbols for an electron configuration is by constructing a table counting all of its possible microstates. 
+For a given orbital quantum number $$ l $$, there is a maximum of $$ n=2(2l+1) $$ orbital positions for the electrons to occupy. 
+The total number of possible microstates $$ N $$ can be calculated as a combination of all electrons occupying the available orbital positions,
+$$
+N = \left(\begin{array}{c} n \\ e \end{array}\right) = \frac{n!}{e!(n-e)!},
+$$
+where $$ n $$ is the number of orbital positions for a given $$ l $$ and $$ e $$ is the number of electrons. 
+
+For example, consider the electron configuration $$ 2s 2p^2 $$. The total number of possible microstates can then be calculated as 
+$$
+N = N_{2s}\times N_{2p} = \frac{n_{2s}!}{e_{2s}!(n_{2s}-e_{2s})!} \times \frac{n_{2p}!}{e_{2p}!(n_{2p}-e_{2p})!} = 30,
+$$
+where we made the substitutions $$ n_{2s}=2 $$, $$ e_{2s}=1 $$ to account for a single electron occupying the $$ 2s $$ orbital, and $$ n_{2p}=6 $$, $$ e_{2p}=2 $$ to account for two electrons occupying the $$ 2p $$ orbital. Therefore, we have 30 total microstates for the $$ 2s 2p^2 $$ configuration.
+
+From the list of all possible microstates, all possible combinations of $$ (M_L, M_S) $$ can be counted and placed in a table. The multiplet term symbol is obtained by accounting for $$ J $$ for each state. For the example of $$ 2s 2p^2 $$, we have:
+$$
+M_L
+\begin{array}{c|cccc}
+   &    &M_S &    &    \\ 
+   & -\frac{3}{2} & -\frac{1}{2} & \frac{1}{2} & \frac{3}{2} \\ \hline
+-2 &  0 &  1 &  1 &  0 \\
+-1 &  1 &  3 &  3 &  1 \\
+ 0 &  1 &  4 &  4 &  1 \\
+ 1 &  1 &  3 &  3 &  1 \\
+ 2 &  0 &  1 &  1 &  0 
+\end{array}
+$$
+
+We can then start extracting terms from this table, starting from the top-left corner to the bottom-right. 
+From the top row, we can extract the term $$ ^2D $$ for $$ |M_L| = 2 $$ and multiplicity 2: one with $$ M_S = -1/2 $$ and one with $$ M_S=1/2 $$. Accounting for $$ J $$, we obtain $$ ^2D_{3/2,\,5/2} $$. When subtracting, we remove 1 from the entire column. The resulting table is then:
+$$
+M_L
+\begin{array}{c|cccc}
+   &    &M_S &    &    \\ 
+   & -\frac{3}{2} & -\frac{1}{2} & \frac{1}{2} & \frac{3}{2} \\ \hline
+-1 &  1 &  2 &  2 &  1 \\
+ 0 &  1 &  3 &  3 &  1 \\
+ 1 &  1 &  2 &  2 &  1 
+\end{array}
+$$
+where we have removed the $$ M_L = -2 $$ and $$ M_L = 2 $$ rows since they now contain all 0s. In the next step, we can extract the term $$ ^4P $$ for $$ |M_L| = 1 $$ and multiplicity 4: one each with $$ M_S = -3/2, -1/2 , 1/2, 3/2 $$. Accounting for $$ J $$, we obtain $$ ^4P_{1/2,\,3/2,\,5/2} $$. The resulting table is:
+$$
+M_L
+\begin{array}{c|cccc}
+   &    &M_S &    &    \\ 
+   & -\frac{3}{2} & -\frac{1}{2} & \frac{1}{2} & \frac{3}{2} \\ \hline
+-1 &  0 &  1 &  1 &  0 \\
+ 0 &  0 &  2 &  2 &  0 \\
+ 1 &  0 &  1 &  1 &  0 
+\end{array}
+$$
+Here we can extract the term $$ ^2P $$ for $$ |M_L| = 1 $$ and multiplicity 2: one each with $$ M_S = -1/2, 1/2 $$. Accounting for $$ J $$, we obtain $$ ^2P_{1/2,\,3/2} $$. The resulting table is:
+$$
+M_L
+\begin{array}{c|cccc}
+   &    &M_S &    &    \\ 
+   & -\frac{3}{2} & -\frac{1}{2} & \frac{1}{2} & \frac{3}{2} \\ \hline
+ 0 &  0 &  1 &  1 &  0 \\
+\end{array}
+$$
+where we have removed the $$ M_L = -1 $$ and $$ M_L = 1 $$ rows since they now contain all 0s. We are left with the final row, which we can extract the term $$ ^2S $$ for $$ |M_L| = 0 $$ and multiplicity 2: one each with $$ M_S = -1/2, 1/2 $$. Accounting for $$ J $$, we obtain $$ ^2S_{1/2} $$. 
+
+Therefore for the $$ 2s 2p^2 $$ configuration, we have obtained the following 8 terms: 
+$$
+{}^2D_{3/2,\,5/2}, {}^4P_{1/2,\,3/2,\,5/2}, {}^2P_{1/2,\,3/2}, {}^2S_{1/2}
+$$
+
+I have written a python script to calculate atomic term symbols based on this method <a href="https://github.com/ccheung93/atomic-term-symbol-calculator" target="_blank">here</a>.
