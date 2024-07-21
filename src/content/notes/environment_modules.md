@@ -43,11 +43,12 @@ make install
 
 The `./configure`  runs the executable and ensures the prerequisite tools are installed. The package is then installed in the `/modules` directory, but you can specify where you want it installed by using the `--prefix` flags. I just ended up moving the entire `/modules` directory to `/usr/share/modules`.
 
-Now all that's left is to add the following lines in your `.bashrc`:
+Now for users to use the modules package to install their custom packages, they would have to add the following lines in your `.bashrc`:
 ```
-source /usr/share/modules/init/bash
 module use ~/modules
 ```
+
+Instead, what the systems admin can do is use the `/etc/profile.d/` directory, since any `.sh` files in there will be sourced on server login. I simply added a file `/etc/profile.d/use_modules.sh` with the line I would have had to add to my `.bashrc`.
 
 ### Using modules
 
