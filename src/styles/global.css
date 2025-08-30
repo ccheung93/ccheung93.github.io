@@ -15,6 +15,18 @@
 	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
 }
+
+[data-theme="dark"] {
+	--accent: #4ade80;
+	--accent-dark: #22c55e;
+	--black: 255, 255, 255;
+	--gray: 156, 163, 175;
+	--gray-light: 55, 65, 81;
+	--gray-dark: 229, 231, 235;
+	--gray-gradient: #202023, #202023;
+	--box-shadow: 0 2px 6px rgba(0, 0, 0, 25%), 0 8px 24px rgba(0, 0, 0, 33%),
+		0 16px 32px rgba(0, 0, 0, 33%);
+}
 @font-face {
 	font-family: 'Atkinson';
 	src: url('/fonts/atkinson-regular.woff') format('woff');
@@ -41,6 +53,11 @@ body {
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
+	min-height: 100vh;
+}
+
+[data-theme="dark"] body {
+	background: #202023;
 }
 main {
 	width: 720px;
@@ -151,4 +168,41 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+/* Dark mode overrides for Tailwind classes */
+[data-theme="dark"] .bg-gray-50 {
+	background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+[data-theme="dark"] .text-gray-600 {
+	color: rgba(255, 255, 255, 0.8) !important;
+}
+
+[data-theme="dark"] .text-gray-700 {
+	color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Additional dark mode styles */
+html[data-theme="dark"] {
+	color-scheme: dark;
+}
+
+html[data-theme="dark"] body {
+	background: #202023 !important;
+	color: white !important;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+	color: white !important;
+}
+
+/* Portrait image styling */
+.portrait-ring {
+	border: 2px solid white;
 }

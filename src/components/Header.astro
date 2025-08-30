@@ -1,5 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
@@ -13,6 +14,7 @@ import { SITE_TITLE } from '../consts';
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 		<div class="social-links">
+			<ThemeToggle />
 			<a href="mailto:ccheung@udel.edu" target="_blank">
 				<span class="sr-only">Email me</span>
 				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
@@ -41,6 +43,19 @@ import { SITE_TITLE } from '../consts';
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
+	
+	html[data-theme="dark"] header {
+		background: #202023 !important;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 20%) !important;
+	}
+	
+	html[data-theme="dark"] nav a {
+		color: white !important;
+	}
+	
+	html[data-theme="dark"] h2 a {
+		color: white !important;
+	}
 	h2 {
 		margin: 0;
 		font-size: 1em;
@@ -57,7 +72,7 @@ import { SITE_TITLE } from '../consts';
 	}
 	nav a {
 		padding: 1em 0.5em;
-		color: var(--black);
+		color: rgb(var(--black));
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
 	}
