@@ -5,13 +5,21 @@ interface Props {
 	journal: string;
 	url: string;
 	year: string;
+	link: string;
 }
 
-const { title, authors, journal, url, year } = Astro.props;
+const { title, authors, journal, url, year, link } = Astro.props;
 ---
 
 <li>
 	<strong><span set:html={title}></span></strong>,
 	{authors},
-	<a href={url} target="_blank">{journal} ({year})</a>.
+	{url ? (
+		<a href={url} target="_blank" rel="noopener noreferrer">
+			{journal} ({year}).
+		</a>
+	) : (
+		<>{journal} ({year}).</>
+	)}	
+	{link && <a href={link} target="_blank" rel="noopener noreferrer">PDF</a>}
 </li>
